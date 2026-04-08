@@ -128,7 +128,7 @@ Unity enables:
 <img src="https://github.com/user-attachments/assets/68158b39-8246-4bc1-b505-5824ea26d876" width="400"/>
 
 
-## OutPut Sample
+## Sample Output
 <img width="400" height="637" alt="Screenshot 2026-04-08 221544" src="https://github.com/user-attachments/assets/10e17e7b-7816-4a1e-b783-b1e26538b6ed" />
 <img width="500" height="334" alt="Screenshot 2026-04-08 221600" src="https://github.com/user-attachments/assets/6df4df99-4947-4ab1-a90a-698b999b5b6c" />
 
@@ -157,4 +157,7 @@ HuggingFace API (Llama 3.1)
 OpenENV framework
 Docker
 HuggingFace Spaces
+
+Author: Raniya Raseen MM
+Sri Sairam Engineering College
 
