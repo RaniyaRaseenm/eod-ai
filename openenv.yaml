@@ -1,0 +1,38 @@
+name: eod-ai
+version: "1.0"
+description: "EOD-AI Bomb Disposal Training Simulator - An RL environment where an LLM agent learns to find and defuse bombs"
+
+author: "raniy"
+
+environment:
+  entry_point: eod_env.py
+  class: EODEnvironment
+
+tasks:
+  - name: task1
+    description: "Easy - 30s timer, perfect hints, 1 bomb"
+    difficulty: easy
+    
+  - name: task2
+    description: "Medium - 20s timer, 70% hint accuracy, 1 bomb"
+    difficulty: medium
+    
+  - name: task3
+    description: "Hard - 15s timer, 30% hint accuracy, 2 bombs"
+    difficulty: hard
+
+agent:
+  entry_point: inference.py
+  model: gpt-4o-mini
+
+grader:
+  entry_point: grader.py
+  score_range: [0.0, 1.0]
+
+runtime:
+  language: python
+  version: "3.12"
+  dependencies:
+    - openai
+    - numpy
+    - openenv
