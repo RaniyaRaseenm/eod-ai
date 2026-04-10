@@ -132,6 +132,10 @@ Unity enables:
 <img width="400" height="637" alt="Screenshot 2026-04-08 221544" src="https://github.com/user-attachments/assets/10e17e7b-7816-4a1e-b783-b1e26538b6ed" />
 <img width="500" height="334" alt="Screenshot 2026-04-08 221600" src="https://github.com/user-attachments/assets/6df4df99-4947-4ab1-a90a-698b999b5b6c" />
 
+🤖 EOD-AI agent successfully defusing bombs across all 3 difficulty levels!
+The agent navigates the grid, scans bombs, and uses an LLM to decide which wire to cut.
+Task 1: 0.900 | Task 2: 0.865 | Task 3: 0.760 — all tasks completed with success! 💣✅
+
 ## Environmental Application
 This system can be extended to:
 
