@@ -162,6 +162,3 @@ OpenENV framework
 Docker
 HuggingFace Spaces
 
-Author: Raniya Raseen MM
-Sri Sairam Engineering College
-
