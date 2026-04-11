@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from fastapi.responses import HTMLResponse
+from pydantic import BaseModel
 import threading
 from inference import run_agent
 from tasks import get_task
@@ -7,20 +8,31 @@ from eod_env import EODEnvironment
 
 app = FastAPI()
 results = {}
-env = get_task("task1")  # default env
+env = None
 
-@app.post("/reset")
+class ActionRequest(BaseModel):
+    action: str
+
+@app.api_route("/reset", methods=["GET", "POST"])
 def reset():
+    global env
+    env = get_task("task1")
     state = env.reset()
     return state
 
 @app.post("/step")
-def step(action: dict):
-    state, reward, done = env.step(action["action"])
+def step(request: ActionRequest):
+    global env
+    if env is None:
+        env = get_task("task1")
+    state, reward, done = env.step(request.action)
     return {"state": state, "reward": reward, "done": done}
 
 @app.get("/state")
-def state():
+def get_state():
+    global env
+    if env is None:
+        env = get_task("task1")
     return env.get_state()
 
 @app.get("/", response_class=HTMLResponse)
@@ -42,6 +54,8 @@ def home():
 
 @app.on_event("startup")
 def startup():
+    global env
+    env = get_task("task1")
     def run_tasks():
         for task_name in ["task1", "task2", "task3"]:
             e = get_task(task_name)
