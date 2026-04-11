@@ -151,6 +151,10 @@ The core idea is to deploy *autonomous agents in environments where humans shoul
 
 https://github.com/user-attachments/assets/d0547a2c-859f-4985-9bc2-64a10ca467e9
 
+## Live Demo
+🤗 [Hugging Face Space](https://huggingface.co/spaces/raniyraseenm/eod-ai)
+Try the live EOD-AI agent defusing bombs in real time across 3 difficulty levels!
+
 ## How to Run
 ```bash
 pip install openai numpy openenv
