@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.backends.legacy:build"
+
+[project]
+name = "eod-ai"
+version = "1.0.0"
+description = "EOD-AI Bomb Disposal Training Simulator"
+requires-python = ">=3.12"
+dependencies = [
+    "openai",
+    "numpy",
+    "fastapi",
+    "uvicorn",
+    "openenv-core",
+    "pyyaml"
+]
