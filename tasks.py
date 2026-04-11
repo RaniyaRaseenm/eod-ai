@@ -11,7 +11,7 @@ def task1():
 def task2():
     return EODEnvironment(
         grid_size=8,
-        timer=20,
+        timer=25,
         hint_accuracy=0.7,
         num_bombs=1
     )
@@ -19,7 +19,7 @@ def task2():
 def task3():
     return EODEnvironment(
         grid_size=8,
-        timer=15,
+        timer=20,
         hint_accuracy=0.3,
         num_bombs=2
     )

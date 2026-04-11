@@ -63,7 +63,7 @@ Set the following environment variables before running:
 - API_BASE_URL = https://router.huggingface.co/v1
 
 ⚠️ Do NOT hardcode tokens in the code.
-ad
+
 ## How to Run
 ```bash
 pip install openai numpy openenv
@@ -74,3 +74,6 @@ HuggingFace API (Llama 3.1)
 OpenENV framework
 Docker
 HuggingFace Spaces
+
+
+

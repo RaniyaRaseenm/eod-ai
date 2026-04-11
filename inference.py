@@ -16,7 +16,7 @@ MAX_STEPS = 200
 # Competition required: use OpenAI client
 client = OpenAI(
     base_url=API_BASE_URL,
-    api_key=os.getenv("HF_TOKEN")
+    api_key=HF_TOKEN
 )
 
 # Competition required log formats
