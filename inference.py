@@ -14,10 +14,14 @@ BENCHMARK = "eod-ai"
 MAX_STEPS = 200
 
 # Competition required: use OpenAI client
-client = OpenAI(
-    base_url=API_BASE_URL,
-    api_key=HF_TOKEN
-)
+try:
+    client = OpenAI(
+        base_url=API_BASE_URL,
+        api_key=HF_TOKEN
+    )
+except Exception as e:
+    print(f"[DEBUG] Client error: {e}", flush=True)
+    client = None
 
 # Competition required log formats
 def log_start(task: str, env: str, model: str):
@@ -46,9 +50,12 @@ def get_llm_action(state: dict) -> str:
 
     # Use LLM as backup
     try:
+        if client is None:
+            return "cut_red"
+
         prompt = textwrap.dedent(f"""
             You are a bomb disposal expert.
-            Hint: {state['hint']}
+            Hint: {state.get('hint', 'no hint')}
             Choose one: cut_red, cut_blue, cut_green
             Reply with ONLY the action name.
         """).strip()
@@ -144,6 +151,9 @@ def run_task(task_name: str):
         score = round(min(1.0, max(0.0, score)), 3)
         success = bombs_defused == total_bombs
 
+    except Exception as e:
+        print(f"[ERROR] {task_name} failed: {e}", flush=True)
+
     finally:
         log_end(
             success=success,
@@ -158,4 +168,7 @@ if __name__ == "__main__":
     print("🚀 EOD-AI Inference", flush=True)
     for task in ["task1", "task2", "task3"]:
         print(f"\n--- {task} ---", flush=True)
-        run_task(task)
+        try:
+            run_task(task)
+        except Exception as e:
+            print(f"[ERROR] {task} failed: {e}", flush=True)
