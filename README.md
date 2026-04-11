@@ -155,9 +155,15 @@ https://github.com/user-attachments/assets/d0547a2c-859f-4985-9bc2-64a10ca467e9
 🤗 [Hugging Face Space](https://huggingface.co/spaces/raniyraseenm/eod-ai)
 Try the live EOD-AI agent defusing bombs in real time across 3 difficulty levels!
 
+## Action Space
+move_up, move_down, move_left, move_right, scan, cut_red, cut_blue, cut_green
+
+## Observation Space
+agent_position, bombs_found, bombs_defused, hint, time_left, steps, done
+
 ## How to Run
 ```bash
-pip install openai numpy openenv
+pip install openai numpy fastapi uvicorn openenv-core
 python inference.py
 Tech Stack
 Python 3.12
