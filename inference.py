@@ -7,6 +7,7 @@ from grader import grade
 
 # Competition required variables
 API_BASE_URL = os.getenv("API_BASE_URL") or "https://router.huggingface.co/v1"
+API_KEY = os.getenv("API_KEY")
 HF_TOKEN = os.getenv("HF_TOKEN")
 MODEL_NAME = os.getenv("MODEL_NAME") or "meta-llama/Llama-3.1-8B-Instruct"
 
@@ -17,7 +18,7 @@ MAX_STEPS = 200
 try:
     client = OpenAI(
         base_url=API_BASE_URL,
-        api_key=HF_TOKEN
+        api_key=API_KEY or HF_TOKEN
     )
 except Exception as e:
     print(f"[DEBUG] Client error: {e}", flush=True)
