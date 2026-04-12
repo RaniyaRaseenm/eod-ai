@@ -1,5 +1,30 @@
 import random
 import math
+from pydantic import BaseModel
+from typing import Optional, List
+
+# Pydantic typed models
+class Observation(BaseModel):
+    agent_position: list
+    grid_size: int
+    bombs_found: list
+    bombs_defused: list
+    current_bomb_index: Optional[int] = None
+    scan_done: bool
+    hint: Optional[str] = None
+    time_left: int
+    steps: int
+    done: bool
+    total_reward: float
+    distance_to_bomb: int
+    nearest_bomb_position: Optional[list] = None
+    last_action: Optional[str] = None
+
+class Action(BaseModel):
+    action: str
+
+class Reward(BaseModel):
+    reward: float
 
 class EODEnvironment:
     ACTIONS = [
@@ -70,7 +95,7 @@ class EODEnvironment:
 
     def step(self, action):
         if self.done:
-            return self.get_state(), 0, True
+            return self.get_state(), 0, True, {}
 
         reward = -1
         self.steps += 1
@@ -138,7 +163,7 @@ class EODEnvironment:
             reward -= 50
 
         self.total_reward += reward
-        return self.get_state(), reward, self.done
+        return self.get_state(), reward, self.done, {}
 
     def get_state(self):
         return {

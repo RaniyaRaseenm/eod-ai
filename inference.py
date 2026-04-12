@@ -110,8 +110,7 @@ def run_agent(env):
             action = "scan"
         else:
             action = get_llm_action(state)
-
-        state, reward, done = env.step(action)
+        state, reward, done, info= env.step(action)
         rewards.append(reward)
         steps_taken += 1
 
