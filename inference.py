@@ -6,7 +6,7 @@ from tasks import get_task
 from grader import grade
 
 # Competition required variables
-API_BASE_URL = os.getenv("API_BASE_URL") or "https://router.huggingface.co/v1"
+API_BASE_URL = os.getenv("API_BASE_URL")
 API_KEY = os.getenv("API_KEY")
 HF_TOKEN = os.getenv("HF_TOKEN")
 MODEL_NAME = os.getenv("MODEL_NAME") or "meta-llama/Llama-3.1-8B-Instruct"
@@ -17,7 +17,7 @@ MAX_STEPS = 200
 # Competition required: use OpenAI client
 try:
     client = OpenAI(
-        base_url=API_BASE_URL,
+        base_url=API_BASE_URL or "https://router.huggingface.co/v1",
         api_key=API_KEY or HF_TOKEN
     )
 except Exception as e:
@@ -38,18 +38,6 @@ def log_end(success: bool, steps: int, score: float, rewards: List[float]):
     print(f"[END] success={str(success).lower()} steps={steps} score={score:.3f} rewards={rewards_str}", flush=True)
 
 def get_llm_action(state: dict) -> str:
-    hint = state.get("hint", "")
-
-    # Use hint directly if available
-    if hint:
-        if "cut red" in hint:
-            return "cut_red"
-        elif "cut blue" in hint:
-            return "cut_blue"
-        elif "cut green" in hint:
-            return "cut_green"
-
-    # Use LLM as backup
     try:
         if client is None:
             return "cut_red"
@@ -57,7 +45,8 @@ def get_llm_action(state: dict) -> str:
         prompt = textwrap.dedent(f"""
             You are a bomb disposal expert.
             Hint: {state.get('hint', 'no hint')}
-            Choose one: cut_red, cut_blue, cut_green
+            Agent position: {state.get('agent_position')}
+            Choose one action: cut_red, cut_blue, cut_green
             Reply with ONLY the action name.
         """).strip()
 
@@ -111,7 +100,8 @@ def run_agent(env):
             action = "scan"
         else:
             action = get_llm_action(state)
-        state, reward, done, info= env.step(action)
+
+        state, reward, done, info = env.step(action)
         rewards.append(reward)
         steps_taken += 1
 
