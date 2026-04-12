@@ -171,4 +171,6 @@ HuggingFace API (Llama 3.1)
 OpenENV framework
 Docker
 HuggingFace Spaces
+## Baseline Scores
+Task 1: 0.900 | Task 2: 0.865 | Task 3: 0.760
 
